@@ -61,21 +61,15 @@ h1 {
           backface-visibility: hidden;
   border-radius: 0 5% 5% 0;
 }
-.page__half--front img {
-  border-radius: 0 5% 5% 0;
-}
 .page__half--back {
   --rotation: 180;
   --coefficient: 2;
   border-radius: 5% 0 0 5%;
 }
-.page__half--back img {
-  border-radius: 5% 0 0 5%;
-}
 .book {
   height: 80vmin;
   position: fixed;
-  width: 56vmin;
+  width: 50vmin;
   min-width: 150px;
   min-height: 200px;
   top: 50%;
@@ -152,9 +146,14 @@ h1 {
   text-align: center;
 }
 img {
-  width: 100%;
   height: 100%;
   -o-object-fit: center;
      object-fit: center;
   z-index: 1;
+}
+.page__half--back img {
+  border-radius: 50% 0 0 50%;
+}
+.page__half--front img {
+  border-radius: 0 50% 50% 0;
 }
