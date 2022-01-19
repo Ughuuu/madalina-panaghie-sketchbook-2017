@@ -3,7 +3,7 @@ const {
   ScrollTrigger,
   gsap: { to, set } } =
 window;
-gsap.ticker.fps(24)
+//gsap.ticker.fps(24)
 let scrollingDown = true
 
 function pageScroll() {
