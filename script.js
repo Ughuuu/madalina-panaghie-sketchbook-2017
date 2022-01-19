@@ -4,6 +4,36 @@ const {
   gsap: { to, set } } =
 window;
 
+let scrollingDown = true
+
+function pageScroll() {
+  checkScrollingDirection()
+  if (scrollingDown) {
+    window.scrollBy(0,20)
+  } else {
+    window.scrollBy(0,-150)
+  }
+  scrolldelay = setTimeout(pageScroll,100);
+}
+pageScroll()
+
+
+function checkScrollingDirection() {
+  var win_h = (self.innerHeight) ? self.innerHeight : document.body.clientHeight;
+  var scrl_pos = window.pageYOffset ? window.pageYOffset : document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
+
+  console.log(document.body.scrollHeight)
+  console.log(scrl_pos + win_h)
+  console.log(scrl_pos)
+
+  // if scrollbar reaces to bottom
+  if (document.body.scrollHeight - 5 <= (scrl_pos + win_h)) {
+    scrollingDown = false
+  } else if (scrl_pos == 0) {
+    scrollingDown = true
+  }
+  console.log(scrollingDown)
+}
 function createPages(pages, bookPrefix){
   const book = document.getElementById("book")
   for (let i = 0; i < pages; i++) {
@@ -89,6 +119,4 @@ PAGES.forEach((page, index) => {
       scrub: 1,
       start: () => (index + 1) * (window.innerHeight * 0.25),
       end: () => (index + 1.5) * (window.innerHeight * 0.25) } });
-
-
 });
