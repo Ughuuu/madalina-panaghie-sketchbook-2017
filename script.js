@@ -3,17 +3,17 @@ const {
   ScrollTrigger,
   gsap: { to, set } } =
 window;
-
+gsap.ticker.fps(24)
 let scrollingDown = true
 
 function pageScroll() {
   checkScrollingDirection()
   if (scrollingDown) {
-    window.scrollBy(0,20)
+    window.scrollBy(0,25)
   } else {
     window.scrollBy(0,-750)
   }
-  scrolldelay = setTimeout(pageScroll, 100);
+  scrolldelay = setTimeout(pageScroll, 250);
 }
 pageScroll()
 
@@ -45,8 +45,9 @@ function createPages(pages, bookPrefix){
     const page1Number = document.createElement("div")
 
     page1Number.classList.add("page__number")
-    page1.appendChild(page1Image)
     page1.appendChild(page1Number).appendChild(document.createTextNode(`${i*2 + 1}`))
+
+    page1.appendChild(page1Image)
 
     const page2Image = document.createElement("img")
     page2Image.src = `./images/${bookPrefix}-${i*2 + 2}.jpeg`
