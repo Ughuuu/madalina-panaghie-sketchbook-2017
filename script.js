@@ -11,9 +11,9 @@ function pageScroll() {
   if (scrollingDown) {
     window.scrollBy(0,20)
   } else {
-    window.scrollBy(0,-150)
+    window.scrollBy(0,-750)
   }
-  scrolldelay = setTimeout(pageScroll,100);
+  scrolldelay = setTimeout(pageScroll, 100);
 }
 pageScroll()
 
@@ -22,17 +22,12 @@ function checkScrollingDirection() {
   var win_h = (self.innerHeight) ? self.innerHeight : document.body.clientHeight;
   var scrl_pos = window.pageYOffset ? window.pageYOffset : document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
 
-  console.log(document.body.scrollHeight)
-  console.log(scrl_pos + win_h)
-  console.log(scrl_pos)
-
   // if scrollbar reaces to bottom
   if (document.body.scrollHeight - 5 <= (scrl_pos + win_h)) {
     scrollingDown = false
   } else if (scrl_pos == 0) {
     scrollingDown = true
   }
-  console.log(scrollingDown)
 }
 function createPages(pages, bookPrefix){
   const book = document.getElementById("book")
@@ -56,8 +51,12 @@ function createPages(pages, bookPrefix){
     const page2Image = document.createElement("img")
     page2Image.src = `./images/${bookPrefix}-${i*2 + 2}.jpeg`
     const page2Number = document.createElement("div")
+    const page2Header = document.createElement("div")
+    page2Header.classList.add("page__header")
     page2Number.classList.add("page__number")
     page2.appendChild(page2Image)
+    page2Header.appendChild(document.createTextNode(`Madalina Panaghie Sketchbook #${bookPrefix}`))
+    page2.appendChild(page2Header)
     page2.appendChild(page2Number).appendChild(document.createTextNode(`${i*2 + 2}`))
 
     page.appendChild(page1)
