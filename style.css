@@ -1,11 +1,7 @@
 * {
   box-sizing: border-box;
 }
-html {
-  scroll-behavior: smooth;
-}
 :root {
-  --page-scroll: 25;
   --underline: rgba(64,64,64,0.4);
   --spine: #000;
   --cover: #0c0c0c;
@@ -15,7 +11,7 @@ html {
 }
 body {
   width: 100vw;
-  height: calc(((var(--page-count) + 2) * var(--page-scroll)) * 1vh);
+  height: 100vh;
   background: var(--bg);
   overflow-x: hidden;
 }

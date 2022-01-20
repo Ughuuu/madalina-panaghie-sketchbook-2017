@@ -1,34 +1,10 @@
 const {
   gsap,
-  ScrollTrigger,
   gsap: { to, set } } =
 window;
 //gsap.ticker.fps(24)
-let scrollingDown = true
-
-function pageScroll() {
-  checkScrollingDirection()
-  if (scrollingDown) {
-    window.scrollBy(0,25)
-  } else {
-    window.scrollBy(0,-750)
-  }
-  scrolldelay = setTimeout(pageScroll, 250);
-}
-pageScroll()
 
 
-function checkScrollingDirection() {
-  var win_h = (self.innerHeight) ? self.innerHeight : document.body.clientHeight;
-  var scrl_pos = window.pageYOffset ? window.pageYOffset : document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop;
-
-  // if scrollbar reaces to bottom
-  if (document.body.scrollHeight - 5 <= (scrl_pos + win_h)) {
-    scrollingDown = false
-  } else if (scrl_pos == 0) {
-    scrollingDown = true
-  }
-}
 function createPages(pages, bookPrefix){
   const book = document.getElementById("book")
   for (let i = 0; i < pages; i++) {
@@ -91,32 +67,63 @@ const PAGES = [...document.querySelectorAll('.book__page')];
 const pageCount = PAGES.length - 1;
 updatePageCount(pageCount)
 
-gsap.registerPlugin(ScrollTrigger);
-
-to('.book', {
-  scrollTrigger: {
-    scrub: 1,
-    start: () => 0,
-    end: () => window.innerHeight * 0.25 },
-
-  scale: 1 });
-
-
-PAGES.forEach((page, index) => {
-  set(page, { z: index === 0 ? pageCount : -index * 1 });
+function pageSet(page, index){
   if (index === pageCount) return false;
-  to(page, {
-    rotateY: `-=${180 - index / 2}`,
-    scrollTrigger: {
-      scrub: 1,
-      start: () => (index + 1) * (window.innerHeight * 0.25),
-      end: () => (index + 2) * (window.innerHeight * 0.25) } });
+  set(page, {
+    z: index === 0 ? pageCount : (pageCount - index) * 0.2
+  });
+}
 
+PAGES.forEach(pageSet)
 
+function pageAnimation(page, index) {
+  if (index == 0) {
+    to('.book', {
+      duration: 2,
+      transform: "translate(0, -50%) scale(1)"
+    });
+  }
+  if (index === pageCount) return false;
+  let ease = "circle"
+  let duration = 3
+  let delay = 1.8
   to(page, {
-    z: index === 0 ? -pageCount : index,
-    scrollTrigger: {
-      scrub: 1,
-      start: () => (index + 1) * (window.innerHeight * 0.25),
-      end: () => (index + 1.5) * (window.innerHeight * 0.25) } });
-});
+    rotateY: `-=${180 - index * 0.5}`,
+    z: index === 0 ? -pageCount : index * 0.2,
+    ease: ease,
+    duration: duration,
+    delay: delay * index,
+    onComplete: () => {
+      if (index == pageCount - 1) {
+        PAGES.slice().reverse().forEach(resetPages)
+      }
+    }
+  })
+}
+
+function resetPages(page, index){
+  if (index === 0) return false;
+  let ease = "circle"
+  let duration = 1.4
+  let delay = 0.3
+  to(page, {
+    rotateY: 0,
+    z: index === pageCount ? pageCount : (index) * 0.2,
+    ease: ease,
+    duration: duration,
+    delay: delay * index,
+    onComplete: () => {
+      if (index == pageCount) {
+        TweenLite.delayedCall(4, ()=> {PAGES.forEach(pageAnimation)})
+        PAGES.forEach(pageSet)
+        to('.book', {
+          duration: 2,
+          transform: "translate(-50%, -50%) scale(0.5)"
+        })
+      }
+    }
+  })
+}
+
+TweenLite.delayedCall(2, ()=>{PAGES.forEach(pageAnimation)});
+
