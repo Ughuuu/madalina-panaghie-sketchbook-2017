@@ -32,7 +32,7 @@ function createPages(pages, bookPrefix){
     page2Header.classList.add("page__header")
     page2Number.classList.add("page__number")
     page2.appendChild(page2Image)
-    page2Header.appendChild(document.createTextNode(`Madalina Panaghie Sketchbook #${bookPrefix}`))
+    page2Header.appendChild(document.createTextNode(`Sketchbook #${bookPrefix}`))
     page2.appendChild(page2Header)
     page2.appendChild(page2Number).appendChild(document.createTextNode(`${i*2 + 2}`))
 

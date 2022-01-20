@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
 }
 :root {
   --underline: rgba(64,64,64,0.4);
@@ -28,7 +29,6 @@ h1 {
   transform-style: preserve-3d;
 }
 .page__header{
-  font-family: monospace;
   top:0px;
   position: absolute;
   color: #000000;
@@ -37,7 +37,6 @@ h1 {
   font-size: 0.7rem;
 }
 .page .page__number {
-  font-family: monospace;
   position: absolute;
   color: #000000;
   bottom: 1rem;
@@ -64,6 +63,7 @@ h1 {
   clip-path: inset(0 0.5% 0 0.5%);
 }
 .page__half--front {
+  overflow:hidden;
   --rotation: 0;
   --coefficient: 0;
   -webkit-backface-visibility: hidden;
@@ -71,6 +71,7 @@ h1 {
   border-radius: 0 5% 5% 0;
 }
 .page__half--back {
+  overflow:hidden;
   --rotation: 180;
   --coefficient: 2;
   border-radius: 5% 0 0 5%;
@@ -161,8 +162,8 @@ img {
   z-index: 1;
 }
 .page__half--back img {
-  border-radius: 50% 0 0 50%;
+  border-radius: 5% 0 0 5%;
 }
 .page__half--front img {
-  border-radius: 0 50% 50% 0;
+  border-radius: 0 5% 5% 0;
 }
