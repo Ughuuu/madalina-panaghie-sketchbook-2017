@@ -29,27 +29,6 @@ h1 {
   position: relative;
   transform-style: preserve-3d;
 }
-.page__header{
-  top:0px;
-  position: absolute;
-  color: #000000;
-  bottom: 1rem;
-  z-index: 3;
-  font-size: 0.7rem;
-}
-.page .page__number {
-  position: absolute;
-  color: #000000;
-  bottom: 1rem;
-  z-index: 3;
-  font-size: 0.7rem;
-}
-.page__half--front .page__number {
-  right: 1rem;
-}
-.page__half--back .page__number {
-  left: 1rem;
-}
 .page__half {
   display: flex;
   align-items: center;
@@ -67,17 +46,23 @@ h1 {
   overflow:hidden;
   --rotation: 0;
   --coefficient: 0;
+  z-index: 1;
+  transform: translate3d(0,0, 0);
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   border-radius: 0 5% 5% 0;
 }
 .page__half--back {
   overflow:hidden;
+  z-index: 0;
+  transform: translate3d(0,0, 1);
   --rotation: 180;
   --coefficient: 2;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
   border-radius: 5% 0 0 5%;
 }
-.book {
+.book-2017 {
   height: 80vmin;
   position: fixed;
   width: 50vmin;
@@ -85,7 +70,31 @@ h1 {
   min-height: 200px;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.5);
+  transform: translate(-190%, -50%) scale(0.5);
+  transform-style: preserve-3d;
+  perspective: 1200px;
+}
+.book-2018 {
+  height: 80vmin;
+  position: fixed;
+  width: 50vmin;
+  min-width: 150px;
+  min-height: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(80%, -50%) scale(0.5);
+  transform-style: preserve-3d;
+  perspective: 1200px;
+}
+.book-2019 {
+  height: 80vmin;
+  position: fixed;
+  width: 50vmin;
+  min-width: 150px;
+  min-height: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(140%, -50%) scale(0.5);
   transform-style: preserve-3d;
   perspective: 1200px;
 }
@@ -118,7 +127,7 @@ h1 {
   transform: translate(0, -50%);
   height: 94%;
   width: 94%;
-  z-index: calc(((var(--page-count) + 2) - var(--page-index)) * 2);
+  z-index: calc(((var(--page-count) * 2 + 2) - var(--page-index)) * 2);
   transform-origin: 0% 50%;
 }
 .book__cover {
@@ -159,7 +168,7 @@ img {
   height: 100%;
   -o-object-fit: center;
      object-fit: center;
-  z-index: 1;
+  z-index: calc(((var(--page-count) * 2 + 1) - var(--page-index)) * 2);
 }
 .page__half--back img {
   border-radius: 5% 0 0 5%;
