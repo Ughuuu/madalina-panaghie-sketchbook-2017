@@ -2,7 +2,7 @@ const {
   gsap,
   gsap: { to, set } } =
 window;
-//gsap.ticker.fps(24)
+gsap.ticker.fps(24)
 
 
 function createPages(pages, bookPrefix){
@@ -32,7 +32,7 @@ function createPages(pages, bookPrefix){
     page2Header.classList.add("page__header")
     page2Number.classList.add("page__number")
     page2.appendChild(page2Image)
-    page2Header.appendChild(document.createTextNode(`Sketchbook #${bookPrefix}`))
+    page2Header.appendChild(document.createTextNode(`SKETCHBOOK #${bookPrefix}`))
     page2.appendChild(page2Header)
     page2.appendChild(page2Number).appendChild(document.createTextNode(`${i*2 + 2}`))
 
