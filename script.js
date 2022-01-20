@@ -142,7 +142,7 @@ function createBook(year, pages, startIndex, onComplete, endPos) {
   }
   return {PAGES, startAnimation: () => {
     initialZoom()
-    TweenLite.delayedCall(3, ()=>{PAGES.forEach(pageAnimation)})
+    TweenLite.delayedCall(1, ()=>{PAGES.forEach(pageAnimation)})
   }}
 }
 let firstBook = null
