@@ -43,6 +43,12 @@ function createBookEnd(pages, book) {
   book.appendChild(pageEnd)
 }
 
+let FAST_MODE = false
+
+if (window.location.search) {
+  FAST_MODE = true
+}
+
 function createBook(year, pages, startIndex, onComplete, endPos) {
 
   const book = document.getElementById(`book-${year}`)
@@ -74,8 +80,6 @@ function createBook(year, pages, startIndex, onComplete, endPos) {
   }
 
   PAGES.forEach(pageSet)
-  
-  const FAST_MODE = false
 
   function initialZoom(){
     to(`.book-${year}`, {
