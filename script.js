@@ -114,6 +114,7 @@ function createBook(year, pages, startIndex, onComplete, endPos) {
       duration: duration,
       delay: delay * index,
       onComplete: () => {
+        window.history.pushState('page2', 'Title', '/index.html?page=' + (index + 1));
         if (index == pageCount - 1) {
           PAGES.slice().reverse().forEach(resetPages)
         }
@@ -150,7 +151,7 @@ const book2019 = createBook(2019, 20, 93, ()=>{firstBook.startAnimation()}, "tra
 const book2018 = createBook(2018, 27, 39, ()=>{book2019.startAnimation()}, "translate(80%, -50%) scale(0.5)")
 const book2017 = createBook(2017, 19, 1, ()=>{book2018.startAnimation()}, "translate(-190%, -50%) scale(0.5)")
 firstBook = book2017
-book2017.startAnimation();
+firstBook.startAnimation();
 
 let PLAYING = true;
 
