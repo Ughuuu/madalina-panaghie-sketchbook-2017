@@ -43,12 +43,6 @@ function createBookEnd(pages, book) {
   book.appendChild(pageEnd)
 }
 
-let FAST_MODE = false
-
-if (window.location.search) {
-  FAST_MODE = true
-}
-
 function createBook(year, pages, startIndex, onComplete, endPos) {
 
   const book = document.getElementById(`book-${year}`)
@@ -103,10 +97,6 @@ function createBook(year, pages, startIndex, onComplete, endPos) {
     let ease = "circle"
     let duration = 3
     let delay = 1.8
-    if (FAST_MODE) {
-      duration = 1.2
-      delay = 0.2
-    }
     to(page, {
       rotateY: `-=${180 - index * 0.3}`,
       z: index === 0 ? -pageCount : index * 0.2,
