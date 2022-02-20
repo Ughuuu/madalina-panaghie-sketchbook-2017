@@ -2,7 +2,7 @@ const {
   gsap,
   gsap: { to, set } } =
 window;
-gsap.ticker.fps(24)
+gsap.ticker.fps(60)
 
 
 function createPages(pages, bookPrefix, book, startIndex = 1){
@@ -147,14 +147,31 @@ firstBook.startAnimation();
 
 let PLAYING = true;
 
-document.addEventListener("click", function(event){
+function pauseOrResume(){
   PLAYING = !PLAYING;
   if (PLAYING) {
     gsap.globalTimeline.resume()
   } else {
     gsap.globalTimeline.pause()
   }
-});
+}
+
+document.addEventListener("click", pauseOrResume);
+
+document.body.onkeyup = function(e){
+  if(e.keyCode == 32){
+    pauseOrResume()
+  }
+  if(e.keyCode == 39){
+    gsap.globalTimeline.timeScale(1)
+  }
+}
+
+document.body.onkeydown = function(e){
+  if(e.keyCode == 39){
+    gsap.globalTimeline.timeScale(5)
+  }
+}
 
 //gsap.globalTimeline.timeScale(5)
 
