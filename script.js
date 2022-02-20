@@ -156,3 +156,5 @@ document.addEventListener("click", function(event){
   }
 });
 
+//gsap.globalTimeline.timeScale(5)
+
