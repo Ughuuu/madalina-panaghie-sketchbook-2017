@@ -109,7 +109,7 @@ function createBook(year, pages, startIndex, onComplete, endPos) {
         }
       },
       onStart: () => {
-        window.history.pushState('', `Page ${index * 2 + 1}`, '/sketchbooks?page=' + (index * 2 + 1));
+        window.history.pushState('', `Page ${index * 2 + 1}`, '/?page=' + (index * 2 + 1));
       }
     })
   }
