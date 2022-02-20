@@ -152,6 +152,14 @@ const book2017 = createBook(2017, 19, 1, ()=>{book2018.startAnimation()}, "trans
 firstBook = book2017
 book2017.startAnimation();
 
+let PLAYING = true;
 
-
+document.addEventListener("click", function(event){
+  PLAYING = !PLAYING;
+  if (PLAYING) {
+    gsap.globalTimeline.resume()
+  } else {
+    gsap.globalTimeline.pause()
+  }
+});
 
