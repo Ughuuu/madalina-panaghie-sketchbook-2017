@@ -114,10 +114,12 @@ function createBook(year, pages, startIndex, onComplete, endPos) {
       duration: duration,
       delay: delay * index,
       onComplete: () => {
-        window.history.pushState('page2', 'Title', '/index.html?page=' + (index + 1));
         if (index == pageCount - 1) {
           PAGES.slice().reverse().forEach(resetPages)
         }
+      },
+      onStart: () => {
+        window.history.pushState('', `Page ${index * 2 + 1}`, '/sketchbooks?page=' + (index * 2 + 1));
       }
     })
   }
@@ -147,7 +149,7 @@ function createBook(year, pages, startIndex, onComplete, endPos) {
   }}
 }
 let firstBook = null
-const book2019 = createBook(2019, 20, 93, ()=>{firstBook.startAnimation()}, "translate(140%, -50%) scale(0.5)")
+const book2019 = createBook(2019, 19, 93, ()=>{firstBook.startAnimation()}, "translate(140%, -50%) scale(0.5)")
 const book2018 = createBook(2018, 27, 39, ()=>{book2019.startAnimation()}, "translate(80%, -50%) scale(0.5)")
 const book2017 = createBook(2017, 19, 1, ()=>{book2018.startAnimation()}, "translate(-190%, -50%) scale(0.5)")
 firstBook = book2017
