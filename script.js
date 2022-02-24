@@ -19,6 +19,7 @@ function createPages(pages, bookPrefix, book, startIndex = 1){
     page1Image.src = `./images/${bookPrefix}-${i*2 + startIndex}.webp`
     page1Image.loading = "lazy"
     page1Image.decoding="async"
+    page1Image.height="1024"
 
     page1.appendChild(page1Image)
 
@@ -26,6 +27,7 @@ function createPages(pages, bookPrefix, book, startIndex = 1){
     page2Image.src = `./images/${bookPrefix}-${i*2 + startIndex + 1}.webp`
     page2Image.loading = "lazy"
     page1Image.decoding="async"
+    page1Image.height="1024"
     page2.appendChild(page2Image)
 
     page.appendChild(page1)
