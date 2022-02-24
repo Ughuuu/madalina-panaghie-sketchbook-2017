@@ -16,12 +16,16 @@ function createPages(pages, bookPrefix, book, startIndex = 1){
     page2.classList.add("page__half", "page__half--back")
 
     const page1Image = document.createElement("img")
-    page1Image.src = `./images/${bookPrefix}-${i*2 + startIndex}.jpeg`
+    page1Image.src = `./images/${bookPrefix}-${i*2 + startIndex}.webp`
+    page1Image.loading = "lazy"
+    page1Image.decoding="async"
 
     page1.appendChild(page1Image)
 
     const page2Image = document.createElement("img")
-    page2Image.src = `./images/${bookPrefix}-${i*2 + startIndex + 1}.jpeg`
+    page2Image.src = `./images/${bookPrefix}-${i*2 + startIndex + 1}.webp`
+    page2Image.loading = "lazy"
+    page1Image.decoding="async"
     page2.appendChild(page2Image)
 
     page.appendChild(page1)
