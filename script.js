@@ -115,7 +115,12 @@ function createBook(year, pages, startIndex, onComplete, endPos) {
         }
       },
       onStart: () => {
-        window.history.pushState('', `Page ${index * 2 + 1}`, '/?page=' + (index * 2 + 1));
+        pageText = index + 1
+        if (index > 1) {
+          pageText = index * 2
+        }
+        document.getElementsByClassName('footer-text')[0].textContent = `Page ${pageText} Sketchbook #${year}`
+        window.history.pushState('', `Page ${pageText}`, `/?page=${pageText}&year=${year})`);
       }
     })
   }
@@ -164,20 +169,40 @@ function pauseOrResume(){
 
 document.addEventListener("click", pauseOrResume);
 
+function normalSpeed(){
+  gsap.globalTimeline.timeScale(1)
+}
+
+function showOrHideDiv(className) {
+  var v = document.getElementsByClassName(className)[0];
+  if (v.style.display === "none") {
+     v.style.display = "block";
+  } else {
+     v.style.display = "none";
+  }
+}
+
+function hideText() {
+  showOrHideDiv('footer-text')
+  showOrHideDiv('title-page')
+}
+
 document.body.onkeyup = function(e){
   if(e.keyCode == 32){
     pauseOrResume()
   }
   if(e.keyCode == 39){
-    gsap.globalTimeline.timeScale(1)
+    normalSpeed()
+  }
+  console.log(e.keyCode)
+  if(e.keyCode == 77){
+    hideText()
   }
 }
 
 document.body.onkeydown = function(e){
   if(e.keyCode == 39){
-    gsap.globalTimeline.timeScale(5)
+    fastForward()
   }
 }
-
-//gsap.globalTimeline.timeScale(5)
 

@@ -167,6 +167,23 @@ h1 {
   background: var(--band);
   height: 19vmin;
 }
+.footer {
+  position: absolute;
+  bottom: 10px;
+  font-size: 2vmin;
+  color: #C5C3CE;
+  text-align: center;
+}
+.footer-text {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  left: 0;
+  width: 100%;
+  font-size: 2vmin;
+  color: #C5C3CE;
+  text-align: center;
+}
 .title {
   position: relative;
   top: -6.5vmin;
