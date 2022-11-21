@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Oswald:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tangerine&display=swap');
 * {
   box-sizing: border-box;
   font-family: 'Oswald', sans-serif;
@@ -104,6 +105,7 @@ h1 {
 .book__insert {
   content: '';
   position: absolute;
+  text-align: center;
   height: 94%;
   width: 94%;
   background: var(--insert);
@@ -205,12 +207,35 @@ a { text-decoration: none; }
 }
 .title-page {
   position: absolute;
-  top: 0;
   width: 100%;
   color: #C5C3CE;
   font-size: 6vmin;
   text-align: center;
-
+}
+.page-number-left {
+  overflow:visible;
+  position: fixed;
+  top: 0;
+  width: 95%;
+  color: #0E0E10;
+  font-size: 3vmin;
+  text-align: left;
+  padding-top: 2px;
+  z-index: calc(((var(--page-count) * 2 + 1) - var(--page-index)) * 2);
+  opacity: 0.7;
+  font-family: 'Tangerine', cursive;
+}
+.page-number-right {
+  position: fixed;
+  top: 0;
+  width: 95%;
+  color: #0E0E10;
+  font-size: 3vmin;
+  text-align: right;
+  padding-top: 2px;
+  z-index: calc(((var(--page-count) * 2 + 2) - var(--page-index)) * 2);
+  opacity: 0.7;
+  font-family: 'Tangerine', cursive;
 }
 img {
   height: 100%;

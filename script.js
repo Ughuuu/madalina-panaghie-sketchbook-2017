@@ -1,34 +1,46 @@
 const {
   gsap,
   gsap: { to, set } } =
-window;
+  window;
 gsap.ticker.fps(60)
 
 
-function createPages(pages, bookPrefix, book, startIndex = 1){
+function createPages(pages, bookPrefix, book, startIndex = 1) {
   for (let i = 0; i < pages; i++) {
     const page = document.createElement("div")
     page.classList.add("page", "book__page", `book__page__${bookPrefix}`)
     page.style = `--page-index: ${i + 2};`
     const page1 = document.createElement("div")
     page1.classList.add("page__half", "page__half--front")
+    const pageNumberElement1 = document.createElement("div")
+    const pageNumberElement2 = document.createElement("div")
+    let pageNumber1 = i * 2 + startIndex
+    let pageNumber2 = i * 2 + startIndex + 1
+    pageNumberElement1.innerText = pageNumber1
+    pageNumberElement1.innerHTML = pageNumber1
+    pageNumberElement1.classList.add("page-number-right")
+    pageNumberElement2.innerText = pageNumber2
+    pageNumberElement2.innerHTML = pageNumber2
+    pageNumberElement2.classList.add("page-number-left")
+    page1.appendChild(pageNumberElement1)
     const page2 = document.createElement("div")
     page2.classList.add("page__half", "page__half--back")
 
     const page1Image = document.createElement("img")
-    page1Image.src = `./images/${bookPrefix}-${i*2 + startIndex}.webp`
+    page1Image.src = `./images/${bookPrefix}-${i * 2 + startIndex}.webp`
     page1Image.loading = "lazy"
-    page1Image.decoding="async"
-    page1Image.height="1024"
+    page1Image.decoding = "async"
+    page1Image.height = "1024"
 
     page1.appendChild(page1Image)
 
     const page2Image = document.createElement("img")
-    page2Image.src = `./images/${bookPrefix}-${i*2 + startIndex + 1}.webp`
+    page2Image.src = `./images/${bookPrefix}-${i * 2 + startIndex + 1}.webp`
     page2Image.loading = "lazy"
-    page1Image.decoding="async"
-    page1Image.height="1024"
+    page1Image.decoding = "async"
+    page1Image.height = "1024"
     page2.appendChild(page2Image)
+    page2.appendChild(pageNumberElement2)
 
     page.appendChild(page1)
     page.appendChild(page2)
@@ -58,7 +70,7 @@ function createBook(year, pages, startIndex, onComplete, endPos) {
   const pageCount = PAGES.length - 1;
 
 
-  function updatePageCount(pageCount){
+  function updatePageCount(pageCount) {
     const sheet = document.createElement('style')
     sheet.innerHTML = `
     :root {
@@ -67,21 +79,21 @@ function createBook(year, pages, startIndex, onComplete, endPos) {
     `;
     document.body.appendChild(sheet);
   }
-  
+
 
   updatePageCount(pageCount)
 
 
-  function pageSet(page, index){
+  function pageSet(page, index) {
     if (index === pageCount) return false;
     set(page, {
-      z:index == 0 ? pageCount * 3 : (pageCount - index) * 1
+      z: index == 0 ? pageCount * 3 : (pageCount - index) * 1
     });
   }
 
   PAGES.forEach(pageSet)
 
-  function initialZoom(){
+  function initialZoom() {
     to(`.book-${year}`, {
       duration: 1,
       force3D: true,
@@ -89,7 +101,7 @@ function createBook(year, pages, startIndex, onComplete, endPos) {
     });
   }
 
-  function outroZoom(){
+  function outroZoom() {
     PAGES.forEach(pageSet)
     to(`.book-${year}`, {
       duration: 1,
@@ -125,7 +137,7 @@ function createBook(year, pages, startIndex, onComplete, endPos) {
     })
   }
 
-  function resetPages(page, index){
+  function resetPages(page, index) {
     if (index === 0) return false;
     let ease = "circle"
     let duration = 1.4
@@ -144,21 +156,23 @@ function createBook(year, pages, startIndex, onComplete, endPos) {
       }
     })
   }
-  return {PAGES, startAnimation: () => {
-    initialZoom()
-    TweenLite.delayedCall(1, ()=>{PAGES.forEach(pageAnimation)})
-  }}
+  return {
+    PAGES, startAnimation: () => {
+      initialZoom()
+      TweenLite.delayedCall(1, () => { PAGES.forEach(pageAnimation) })
+    }
+  }
 }
 let firstBook = null
-const book2019 = createBook(2019, 19, 93, ()=>{firstBook.startAnimation()}, "translate(140%, -50%) scale(0.5)")
-const book2018 = createBook(2018, 27, 39, ()=>{book2019.startAnimation()}, "translate(80%, -50%) scale(0.5)")
-const book2017 = createBook(2017, 19, 1, ()=>{book2018.startAnimation()}, "translate(-190%, -50%) scale(0.5)")
+const book2019 = createBook(2019, 19, 93, () => { firstBook.startAnimation() }, "translate(140%, -50%) scale(0.5)")
+const book2018 = createBook(2018, 27, 39, () => { book2019.startAnimation() }, "translate(80%, -50%) scale(0.5)")
+const book2017 = createBook(2017, 19, 1, () => { book2018.startAnimation() }, "translate(-190%, -50%) scale(0.5)")
 firstBook = book2017
 firstBook.startAnimation();
 
 let PLAYING = true;
 
-function pauseOrResume(){
+function pauseOrResume() {
   PLAYING = !PLAYING;
   if (PLAYING) {
     gsap.globalTimeline.resume()
@@ -169,16 +183,16 @@ function pauseOrResume(){
 
 document.addEventListener("click", pauseOrResume);
 
-function normalSpeed(){
+function normalSpeed() {
   gsap.globalTimeline.timeScale(1)
 }
 
 function showOrHideDiv(className) {
   var v = document.getElementsByClassName(className)[0];
   if (v.style.display === "none") {
-     v.style.display = "block";
+    v.style.display = "block";
   } else {
-     v.style.display = "none";
+    v.style.display = "none";
   }
 }
 
@@ -187,21 +201,21 @@ function hideText() {
   showOrHideDiv('title-page')
 }
 
-document.body.onkeyup = function(e){
-  if(e.keyCode == 32){
+document.body.onkeyup = function (e) {
+  if (e.keyCode == 32) {
     pauseOrResume()
   }
-  if(e.keyCode == 39){
+  if (e.keyCode == 39) {
     normalSpeed()
   }
   console.log(e.keyCode)
-  if(e.keyCode == 77){
+  if (e.keyCode == 77) {
     hideText()
   }
 }
 
-document.body.onkeydown = function(e){
-  if(e.keyCode == 39){
+document.body.onkeydown = function (e) {
+  if (e.keyCode == 39) {
     fastForward()
   }
 }
